@@ -99,13 +99,17 @@ Calculator::Calculator(QWidget *parent)
     Button *powerButton = createButton(tr("x\302\262"), SLOT(unaryOperatorClicked()));
     Button *reciprocalButton = createButton(tr("1/x"), SLOT(unaryOperatorClicked()));
     Button *equalButton = createButton(tr("="), SLOT(equalClicked()));
+    Button *sinButton = createButton(tr("sin"), SLOT(unaryOperatorClicked()));
+    Button *cosButton = createButton(tr("cos"), SLOT(equalClicked()));
+    Button *tanButton = createButton(tr("tan"), SLOT(equalClicked()));
+    Button *cotButton = createButton(tr("cot"), SLOT(equalClicked()));
 //! [4]
 
 //! [5]
     QGridLayout *mainLayout = new QGridLayout;
 //! [5] //! [6]
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-    mainLayout->addWidget(display, 0, 0, 1, 6);
+    mainLayout->addWidget(display, 0, 0, 1, 7);
     mainLayout->addWidget(backspaceButton, 1, 0, 1, 2);
     mainLayout->addWidget(clearButton, 1, 2, 1, 2);
     mainLayout->addWidget(clearAllButton, 1, 4, 1, 2);
@@ -133,7 +137,11 @@ Calculator::Calculator(QWidget *parent)
     mainLayout->addWidget(squareRootButton, 2, 5);
     mainLayout->addWidget(powerButton, 3, 5);
     mainLayout->addWidget(reciprocalButton, 4, 5);
-    mainLayout->addWidget(equalButton, 5, 5);
+    mainLayout->addWidget(equalButton, 5, 5, 1, 2);
+    mainLayout->addWidget(sinButton, 1, 6);
+    mainLayout->addWidget(cosButton, 2, 6);
+    mainLayout->addWidget(tanButton, 3, 6);
+    mainLayout->addWidget(cotButton, 4, 6);
     setLayout(mainLayout);
 
     setWindowTitle(tr("Calculator"));
@@ -179,6 +187,9 @@ void Calculator::unaryOperatorClicked()
             return;
         }
         result = 1.0 / operand;
+    } else if (clickedOperator == tr("sin"))
+    {
+        result = std::sin(operand);
     }
     display->setText(QString::number(result));
     waitingForOperand = true;
@@ -404,3 +415,10 @@ bool Calculator::calculate(double rightOperand, const QString &pendingOperator)
     return true;
 }
 //! [38]
+
+//! [40]
+//! void Calculator::sinusClicked()
+//! {
+//!
+//! }
+//! [40]
