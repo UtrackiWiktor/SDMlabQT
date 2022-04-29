@@ -100,9 +100,9 @@ Calculator::Calculator(QWidget *parent)
     Button *reciprocalButton = createButton(tr("1/x"), SLOT(unaryOperatorClicked()));
     Button *equalButton = createButton(tr("="), SLOT(equalClicked()));
     Button *sinButton = createButton(tr("sin"), SLOT(unaryOperatorClicked()));
-    Button *cosButton = createButton(tr("cos"), SLOT(equalClicked()));
-    Button *tanButton = createButton(tr("tan"), SLOT(equalClicked()));
-    Button *cotButton = createButton(tr("cot"), SLOT(equalClicked()));
+    Button *cosButton = createButton(tr("cos"), SLOT(unaryOperatorClicked()));
+    Button *tanButton = createButton(tr("tan"), SLOT(unaryOperatorClicked()));
+    Button *cotButton = createButton(tr("cot"), SLOT(unaryOperatorClicked()));
 //! [4]
 
 //! [5]
@@ -191,6 +191,20 @@ void Calculator::unaryOperatorClicked()
     {
         result = std::sin(operand);
     }
+    else if (clickedOperator == tr("cos"))
+       {
+           result = std::cos(operand);
+       }
+    else if (clickedOperator == tr("tan"))
+       {
+           result = std::tan(operand);
+       }
+    else if (clickedOperator == tr("cot"))
+       {
+           result = (std::cos(operand))/(std::sin(operand));
+
+                   //1/(std::tan(operand));
+       }
     display->setText(QString::number(result));
     waitingForOperand = true;
 }
